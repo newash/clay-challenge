@@ -39,13 +39,19 @@ const styles = (theme: Theme) =>
     success: {
       "&$disabled": {
         backgroundColor: green[500],
-        color: theme.palette.getContrastText(green[500])
+        color: theme.palette.getContrastText(green[500]),
+        "&:hover": {
+          backgroundColor: green[500]
+        }
       }
     },
     failure: {
       "&$disabled": {
         backgroundColor: red[500],
-        color: theme.palette.getContrastText(red[500])
+        color: theme.palette.getContrastText(red[500]),
+        "&:hover": {
+          backgroundColor: red[500]
+        }
       }
     },
     disabled: {},

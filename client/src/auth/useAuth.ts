@@ -41,8 +41,9 @@ export const useAuth = ({ handleResult, ...firebase }: FirebaseContextType) => {
       })
       .then(() => {
         setHasManager(true);
-        setUser("manager");
-      });
+        return firebase.auth.signOut();
+      })
+      .then(() => firebase.auth.signInWithEmailAndPassword(email, password));
 
   return React.useMemo(
     () => ({

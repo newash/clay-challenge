@@ -117,13 +117,11 @@ export const openDoor = functions.https.onCall(
     try {
       const employeeId = context.auth && context.auth.uid;
 
-      const authValue: Record<
-        string,
-        { employeeId: string; doorId: string }
-      > = (await admin
-        .database()
-        .ref("/authorizations")
-        .once("value")).val();
+      const authValue: Record<string, { employeeId: string; doorId: string }> =
+        (await admin
+          .database()
+          .ref("/authorizations")
+          .once("value")).val() || {};
 
       const result = Object.keys(authValue).some(
         key =>
