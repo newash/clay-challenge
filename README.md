@@ -45,3 +45,5 @@ database.rules.json    -- database security settings
 ## TODO
 
 The most important things missing are the tests. Currently there are none.
+
+Also there are no comments in the code and there are some complicated hooks that could use explanation.
