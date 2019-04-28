@@ -22,7 +22,12 @@ import { useAdmin, AdminContext } from "./useAdmin";
 
 const styles = (theme: Theme) =>
   createStyles({
-    grow: { flexGrow: 1 },
+    toolbar: {
+      paddingLeft: 0
+    },
+    grow: {
+      flexGrow: 1
+    },
     tabs: theme.mixins.toolbar,
     content: {
       overflowX: "auto"
@@ -38,8 +43,10 @@ const AdminPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
   return (
     <AdminContext.Provider value={adminApi}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar className={classes.toolbar}>
           <Tabs
+            variant="scrollable"
+            scrollButtons="on"
             value={tabIndex}
             onChange={(_, value) => setTabindex(value)}
             className={clsx(classes.grow, classes.tabs)}

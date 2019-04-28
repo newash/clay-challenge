@@ -1,5 +1,9 @@
 {
   "devDependencies": {
     "firebase-tools": "^6.7.1"
+  },
+  "scripts": {
+    "install": "cd client && yarn && cd ../functions && yarn",
+    "dev": "cd client && yarn start"
   }
 }

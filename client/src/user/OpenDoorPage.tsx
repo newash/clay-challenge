@@ -69,7 +69,7 @@ const OpenDoorPage: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" color="inherit" className={classes.grow}>
-            Open Doors
+            TheCloudLock
           </Typography>
           <IconButton onClick={logout} color="inherit" title="Logout">
             <ExitToAppIcon />
