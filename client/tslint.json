@@ -1,0 +1,45 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-eslint-rules",
+    "tslint-config-prettier"
+  ],
+  "rulesDirectory": ["tslint-plugin-prettier"],
+  "rules": {
+    "prettier": true,
+    "curly": [
+      true,
+      "ignore-same-line"
+    ],
+    "interface-name": false,
+    "jsx-boolean-value": false,
+    "jsx-no-lambda": false,
+    "max-classes-per-file": false,
+    "member-access": false,
+    "no-submodule-imports": false,
+    "no-namespace": false,
+    "no-unused-expression": [
+      true,
+      "allow-fast-null-checks"
+    ],
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "lowercase-last",
+        "named-imports-order": "lowercase-first",
+        "module-source-path": "full"
+      }
+    ],
+    "object-literal-sort-keys": false,
+    "no-empty": false
+  },
+  "jsRules": {
+    "curly": [
+      true,
+      "ignore-same-line"
+    ],
+    "object-literal-sort-keys": false,
+    "no-empty": false
+  }
+}
