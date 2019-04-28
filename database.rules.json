@@ -1,6 +1,12 @@
 {
   "rules": {
-    ".read": "auth.token.admin === true",
-    ".write": "auth.token.admin === true"
+    ".write": "auth.token.admin === true",
+    ".read": true,
+    "authorizations": {
+    	".read": "auth.token.admin === true"
+    },
+    "events": {
+      ".read": "auth.token.admin === true"
+    }
   }
 }

@@ -104,8 +104,8 @@ export const useAdmin = ({
       .httpsCallable("deleteEmployee")({ uid })
       .then(() => setEmpDirty(true));
 
-  const addDoor = (data: { name: string }) =>
-    firebase.database.ref("/doors").push(data);
+  const addDoor = ({ name }: { name: string }) =>
+    firebase.database.ref("/doors").push({ name });
 
   const modifyDoor = ({ uid, ...data }: { uid: string; name: string }) =>
     firebase.database.ref("/doors/" + uid).set(data);

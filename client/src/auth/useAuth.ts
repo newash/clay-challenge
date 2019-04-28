@@ -39,7 +39,10 @@ export const useAuth = ({ handleResult, ...firebase }: FirebaseContextType) => {
         const addManager = firebase.functions.httpsCallable("addManager");
         return addManager({ email });
       })
-      .then(() => setHasManager(true));
+      .then(() => {
+        setHasManager(true);
+        setUser("manager");
+      });
 
   return React.useMemo(
     () => ({
