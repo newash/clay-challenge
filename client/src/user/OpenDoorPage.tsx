@@ -18,7 +18,7 @@ import OpenIcon from "@material-ui/icons/LockOpen";
 import clsx from "clsx";
 import React from "react";
 import { AuthContext } from "../auth";
-import { FirebaseContext } from "../firebase";
+import { FirebaseContext } from "../useFirebase";
 import { useUser } from "./useUser";
 
 const styles = (theme: Theme) =>

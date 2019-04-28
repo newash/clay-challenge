@@ -13,7 +13,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import clsx from "clsx";
 import React from "react";
 import { AuthContext } from "../auth";
-import { FirebaseContext } from "../firebase";
+import { FirebaseContext } from "../useFirebase";
 import AuthorizationList from "./AuthorizationList";
 import DoorList from "./DoorList";
 import EmployeeList from "./EmployeeList";

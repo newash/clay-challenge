@@ -27,15 +27,24 @@ const handleApiResult = (setError: React.Dispatch<string>) => <T extends any[]>(
       return false;
     });
 
-export const createFirebaseContext = (setError: React.Dispatch<string>) => ({
-  auth: firebase.auth(),
-  functions: firebase.functions(),
-  database: firebase.database(),
-  setError,
-  handleResult: handleApiResult(setError)
-});
+export const useFirebase = () => {
+  const [errorMessage, setError] = React.useState("");
+  return {
+    errorMessage,
+    firebase: React.useMemo(
+      () => ({
+        auth: firebase.auth(),
+        functions: firebase.functions(),
+        database: firebase.database(),
+        setError,
+        handleResult: handleApiResult(setError)
+      }),
+      [setError]
+    )
+  };
+};
 
-export type FirebaseContextType = ReturnType<typeof createFirebaseContext>;
+export type FirebaseContextType = ReturnType<typeof useFirebase>["firebase"];
 
 export const FirebaseContext = React.createContext<FirebaseContextType>(
   null as any

@@ -6,7 +6,7 @@ import { createStyles, withStyles, WithStyles } from "@material-ui/core/styles";
 import React from "react";
 import { AdminPage } from "./admin";
 import { useAuth, AuthContext, AuthPage } from "./auth";
-import { createFirebaseContext, FirebaseContext } from "./firebase";
+import { useFirebase, FirebaseContext } from "./useFirebase";
 import { OpenDoorPage } from "./user";
 
 const styles = createStyles({
@@ -19,8 +19,7 @@ const styles = createStyles({
 });
 
 const App: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
-  const [errorMessage, setErrorMessage] = React.useState("");
-  const firebase = createFirebaseContext(setErrorMessage);
+  const { errorMessage, firebase } = useFirebase();
   const authApi = useAuth(firebase);
 
   return (
@@ -40,7 +39,7 @@ const App: React.FC<WithStyles<typeof styles>> = ({ classes }) => {
         )}
         <Snackbar
           open={!!errorMessage}
-          onClose={() => setErrorMessage("")}
+          onClose={() => firebase.setError("")}
           autoHideDuration={4000}
         >
           <SnackbarContent message={errorMessage} />

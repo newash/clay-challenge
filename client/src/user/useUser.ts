@@ -1,5 +1,5 @@
 import React from "react";
-import { FirebaseContextType } from "../firebase";
+import { FirebaseContextType } from "../useFirebase";
 
 export type DoorStateType = "default" | "success" | "failure";
 

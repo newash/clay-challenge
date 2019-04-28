@@ -1,5 +1,5 @@
 import React from "react";
-import { FirebaseContextType } from "../firebase";
+import { FirebaseContextType } from "../useFirebase";
 
 interface EmployeeType {
   uid: string;
