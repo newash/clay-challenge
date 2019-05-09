@@ -15,46 +15,38 @@ export const useUser = ({ handleResult, ...firebase }: FirebaseContextType) => {
   currentDoors.current = doors;
 
   React.useEffect(() => {
-    const doorsRef = firebase.database.ref("/doors");
-
-    const doorsCB = doorsRef.on("value", data => {
-      const doorValue = (data && data.val()) || {};
+    const detatchDoors = firebase.listenDatabase<DoorType>("/doors", data => {
       setDoors(
-        Object.keys(doorValue).map(uid => ({
-          ...doorValue[uid],
+        Object.keys(data).map(uid => ({
+          ...data[uid],
           uid,
           state: "default"
         }))
       );
     });
-
-    return () => {
-      doorsRef.off("value", doorsCB as any);
-    };
+    return detatchDoors;
   }, []);
 
   const openDoor = (uid: string) =>
-    firebase.functions
-      .httpsCallable("openDoor")({ uid })
-      .then(result => {
-        setDoors(
-          currentDoors.current.map(door =>
-            door.uid === uid
-              ? { ...door, state: result.data ? "success" : "failure" }
-              : door
-          )
-        );
-        setTimeout(
-          () => {
-            setDoors(
-              currentDoors.current.map(door =>
-                door.uid === uid ? { ...door, state: "default" } : door
-              )
-            );
-          },
-          result.data ? 2000 : 1000
-        );
-      });
+    firebase.openDoor(uid).then(result => {
+      setDoors(
+        currentDoors.current.map(door =>
+          door.uid === uid
+            ? { ...door, state: result ? "success" : "failure" }
+            : door
+        )
+      );
+      setTimeout(
+        () => {
+          setDoors(
+            currentDoors.current.map(door =>
+              door.uid === uid ? { ...door, state: "default" } : door
+            )
+          );
+        },
+        result ? 2000 : 1000
+      );
+    });
 
   return React.useMemo(
     () => ({

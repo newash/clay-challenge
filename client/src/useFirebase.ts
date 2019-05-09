@@ -27,17 +27,39 @@ const handleApiResult = (setError: React.Dispatch<string>) => <T extends any[]>(
       return false;
     });
 
+const listenDatabase = (database: firebase.database.Database) => <T extends {}>(
+  path: string,
+  callback: (data: Record<string, T>) => void
+) => {
+  const ref = database.ref(path);
+  const listener = ref.on("value", data => {
+    callback((data && data.val()) || {});
+  });
+  return () => {
+    ref.off("value", listener as any);
+  };
+};
+
 export const useFirebase = () => {
   const [errorMessage, setError] = React.useState("");
+  const auth = firebase.auth();
+  const functions = firebase.functions();
+  const database = firebase.database();
+
   return {
     errorMessage,
     firebase: React.useMemo(
       () => ({
-        auth: firebase.auth(),
-        functions: firebase.functions(),
-        database: firebase.database(),
+        auth,
+        functions,
+        database,
         setError,
-        handleResult: handleApiResult(setError)
+        handleResult: handleApiResult(setError),
+        listenDatabase: listenDatabase(database),
+        openDoor: (uid: string) =>
+          functions
+            .httpsCallable("openDoor")({ uid })
+            .then(result => result.data as boolean)
       }),
       [setError]
     )

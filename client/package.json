@@ -42,6 +42,8 @@
     "@types/react-dom": "16.8.4",
     "@types/yup": "^0.26.12",
     "prettier": "^1.17.0",
+    "react-hooks-testing-library": "^0.5.0",
+    "react-test-renderer": "^16.8.6",
     "tslint": "^5.16.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-eslint-rules": "^5.4.0",
